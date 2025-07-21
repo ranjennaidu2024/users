@@ -1,0 +1,102 @@
+{
+	"info": {
+		"_postman_id": "75b217c1-6d7b-4480-bb9e-ba3fd95b7081",
+		"name": "Reactive SpringBoot Test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "39082792",
+		"_collection_link": "https://red-desert-5554-1.postman.co/workspace/PPG~b37e1c9e-8cd1-4930-aeee-7e396f4642bc/collection/39082792-75b217c1-6d7b-4480-bb9e-ba3fd95b7081?action=share&source=collection_link&creator=39082792"
+	},
+	"item": [
+		{
+			"name": "createUser",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstName\": \"Ranjen\",\r\n    \"lastName\": \"Naidu\",\r\n    \"email\": \"test@com\",\r\n    \"password\": \"123456789\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getUser",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstName\": \"Ranjen\",\r\n    \"lastName\": \"Naidu\",\r\n    \"email\": \"test@com\",\r\n    \"password\": \"123456789\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/users/0cb822e9-180d-45be-9f5e-54b926ab46bf",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"0cb822e9-180d-45be-9f5e-54b926ab46bf"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getUsers",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstName\": \"Ranjen\",\r\n    \"lastName\": \"Naidu\",\r\n    \"email\": \"test@com\",\r\n    \"password\": \"123456789\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/users?offset=0&limit=50",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users"
+					],
+					"query": [
+						{
+							"key": "offset",
+							"value": "0"
+						},
+						{
+							"key": "limit",
+							"value": "50"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
