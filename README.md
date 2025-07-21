@@ -5,5 +5,4 @@ Add the following dependencies:
    - H2 database
    - Spring Data R2DBC
 
-2Configured and tested connection to H2 Database in `application.properties`:
-```properties
+2. Configured and tested connection to H2 Database in `application.properties`
