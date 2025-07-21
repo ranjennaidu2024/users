@@ -13,12 +13,14 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/users") //   http://localhost:8080/users
 public class UserController {
-
+//    Mondo: Returning a single String value in HTTP Response Body
 //    @PostMapping
 //    public Mono<String> createUser(@RequestBody @Valid Mono<CreateUserRequest> createUserRequest) {
 //        return Mono.just("OK");
 //    }
 
+
+//    Mono: Returning a User object in HTTP Response body
 //    @PostMapping
 //    public Mono<UserRest> createUser(@RequestBody @Valid Mono<CreateUserRequest> createUserRequest) {
 //        return createUserRequest.map(request -> new UserRest(UUID.randomUUID(),
@@ -28,6 +30,7 @@ public class UserController {
 //        );
 //    }
 
+    //  ResponseEntity: Returning custom HTTP status code
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Mono<ResponseEntity<UserRest>> createUser(@RequestBody @Valid Mono<CreateUserRequest> createUserRequest) {
