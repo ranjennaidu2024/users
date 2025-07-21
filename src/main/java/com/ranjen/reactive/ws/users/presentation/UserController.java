@@ -2,6 +2,7 @@ package com.ranjen.reactive.ws.users.presentation;
 
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Mono;
 
 
 @RestController
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
 
     @PostMapping
-    public void createUser(@RequestBody @Valid CreateUserRequest createUserRequest) {
+    public Mono<String> createUser(@RequestBody @Valid Mono<CreateUserRequest> createUserRequest) {
+        return Mono.just("OK");
     }
 }
