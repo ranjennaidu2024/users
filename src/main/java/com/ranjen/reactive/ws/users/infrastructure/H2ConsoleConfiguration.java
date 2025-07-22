@@ -10,7 +10,7 @@ import org.springframework.context.event.EventListener;
 import java.sql.SQLException;
 
 //to test
-// localhost:8082/h2-console
+// localhost:8082
 // JDBC URL in console change to: jdbc:h2:mem:testDb
 // enter username and password configured in application.properties
 
