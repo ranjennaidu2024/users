@@ -14,7 +14,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"firstName\": \"Ranjen\",\r\n    \"lastName\": \"Naidu\",\r\n    \"email\": \"test@com\",\r\n    \"password\": \"123456789\"\r\n}",
+					"raw": "{\r\n    \"firstName\": \"Ra\",\r\n    \"lastName\": \"Naidu\",\r\n    \"email\": \"test4@com\",\r\n    \"password\": \"123456780\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -48,7 +48,7 @@
 					"raw": "{\r\n    \"firstName\": \"Ranjen\",\r\n    \"lastName\": \"Naidu\",\r\n    \"email\": \"test@com\",\r\n    \"password\": \"123456789\"\r\n}"
 				},
 				"url": {
-					"raw": "http://localhost:8080/users/0cb822e9-180d-45be-9f5e-54b926ab46bf",
+					"raw": "http://localhost:8080/users/688593b8-633e-49e7-8321-48cc636c3bf0",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -56,7 +56,7 @@
 					"port": "8080",
 					"path": [
 						"users",
-						"0cb822e9-180d-45be-9f5e-54b926ab46bf"
+						"688593b8-633e-49e7-8321-48cc636c3bf0"
 					]
 				}
 			},
@@ -75,7 +75,7 @@
 					"raw": "{\r\n    \"firstName\": \"Ranjen\",\r\n    \"lastName\": \"Naidu\",\r\n    \"email\": \"test@com\",\r\n    \"password\": \"123456789\"\r\n}"
 				},
 				"url": {
-					"raw": "http://localhost:8080/users?offset=0&limit=50",
+					"raw": "http://localhost:8080/users?page=3&limit=1",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -86,12 +86,12 @@
 					],
 					"query": [
 						{
-							"key": "offset",
-							"value": "0"
+							"key": "page",
+							"value": "3"
 						},
 						{
 							"key": "limit",
-							"value": "50"
+							"value": "1"
 						}
 					]
 				}
