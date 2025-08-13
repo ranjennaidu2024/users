@@ -7,9 +7,11 @@ import com.ranjen.reactive.ws.users.presentation.UserRest;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+import reactor.core.scheduler.Schedulers;
 
 import java.util.UUID;
 
@@ -17,9 +19,12 @@ import java.util.UUID;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserServiceImpl(UserRepository userRepository) {
+
+    public UserServiceImpl(UserRepository userRepository,PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -31,8 +36,14 @@ public class UserServiceImpl implements UserService {
 //                .flatMap(userEntity ->  userRepository.save(userEntity))
 //                .mapNotNull(userEntity-> convertToRest(userEntity));
 
+//        return createUserRequestMono
+//                .mapNotNull(this::convertToEntity)
+//                .flatMap(userRepository::save)
+//                .mapNotNull(this::convertToRest);
+
+        //after convertToEntity changes to Mono<UserEntity> , we can use flatMap instead of mapNotNull
         return createUserRequestMono
-                .mapNotNull(this::convertToEntity)
+                .flatMap(this::convertToEntity)
                 .flatMap(userRepository::save)
                 .mapNotNull(this::convertToRest);
     }
@@ -52,10 +63,21 @@ public class UserServiceImpl implements UserService {
                 .map(userEntity->convertToRest(userEntity));
     }
 
-    private UserEntity convertToEntity(CreateUserRequest createUserRequest) {
-        UserEntity userEntity = new UserEntity();
-        BeanUtils.copyProperties(createUserRequest, userEntity);
-        return userEntity;
+//    private UserEntity convertToEntity(CreateUserRequest createUserRequest) {
+//        UserEntity userEntity = new UserEntity();
+//        BeanUtils.copyProperties(createUserRequest, userEntity);
+//        return userEntity;
+//    }
+
+    private Mono<UserEntity> convertToEntity(CreateUserRequest createUserRequest) {
+        // Using Mono.fromCallable to create a UserEntity in a non-blocking way , setting up task that will run it only when needed
+        // password encoding is cpu intensive operation, by combining fromCallable and subscribeOn , we use separate thread from the pool
+        return Mono.fromCallable(() -> {
+            UserEntity userEntity = new UserEntity();
+            BeanUtils.copyProperties(createUserRequest, userEntity);
+            userEntity.setPassword(passwordEncoder.encode(createUserRequest.getPassword()));
+            return userEntity;
+        }).subscribeOn(Schedulers.boundedElastic());
     }
 
     private UserRest convertToRest(UserEntity userEntity) {
